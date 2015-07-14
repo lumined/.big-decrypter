@@ -2,7 +2,7 @@
 Java based .big decrypter
 
 Make sure Java is installed on your computer, the current version is available at www.java.com.
-Open a command line in the 'dist' folder and use the following command
+Open a command line where 'decrypter.jar' is stored and use the following command
 
     java -jar decrypter.jar
     
