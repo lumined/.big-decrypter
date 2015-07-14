@@ -47,6 +47,7 @@ public class Decrypter
         NO_BLOCK("Encryption block location is not in file, is file wrong format or not encrypted?"),
         NO_DEADBE7A("Could not find 0xDEADBE7A, is file wrong format or not encrypted?"),
         INVALID_KEYSIZE("Keysize too big, exceeds maximum value of 1024 keys, cannot decrypt the file"),
+        SAME_FILES("Cannot decrypt file, the destination file cannot be the same as the source file"),
         ENCRYPTED(null);
         
         //======================================================================
@@ -127,6 +128,9 @@ public class Decrypter
         cf.keySize = readShort(raf);
         if(cf.keySize > 0x400)
             return State.INVALID_KEYSIZE;
+        
+        if(cf.src.equals(cf.dest))
+            return State.SAME_FILES;
 
         cf.fileKey = new byte[cf.keySize];
         cf.cipherKey = new byte[cf.keySize];
